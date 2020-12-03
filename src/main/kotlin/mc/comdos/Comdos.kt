@@ -19,7 +19,7 @@ class Comdos : ModInitializer {
         ServerSidePacketRegistry.INSTANCE.register(ROLL_PACKET_ID) { packetContext: PacketContext, _: PacketByteBuf? ->
             val player = packetContext.player
             packetContext.taskQueue.execute {
-                if (player.isAlive && (player as RollCooldownTrackable).rollCooldown <= 0) {
+                if (player.isAlive && (player as RollCooldownTrackable).rollCooldown <= 0 && (player as SoftVelocityTrackable).softVelocity.length() > 0.137f) {
                     var newVelocity = (player as SoftVelocityTrackable).softVelocity.multiply(7.0)
 
                     if (!player.isOnGround) {
